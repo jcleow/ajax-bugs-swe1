@@ -1,5 +1,6 @@
 import db from './models/index.mjs';
 import bugs from './controllers/bugs.mjs';
+import features from './controllers/features.mjs';
 
 // import your controllers here
 
@@ -7,6 +8,10 @@ export default function routes(app) {
   // initialize the controller functions here
   // pass in the db for all callbacks
   const bugsController = bugs(db);
-  app.get('/', bugsController.index);
+  app.get('/', bugsController.show);
   app.post('/createBug', bugsController.create);
+  app.get('/bugs', bugsController.index);
+
+  const featuresController = features(db);
+  app.get('/features', featuresController.index);
 }

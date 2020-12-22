@@ -1,0 +1,6 @@
+/** @format */
+
+.createBugForm,
+.bugList {
+  min-height: 400px;
+}
