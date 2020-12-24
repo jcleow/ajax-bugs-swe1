@@ -1,3 +1,5 @@
+const jsSHA = require('jssha');
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const featuresList = [
@@ -22,7 +24,23 @@ module.exports = {
         updatedAt: new Date(),
       },
     ];
-    queryInterface.bulkInsert('Features', featuresList);
+    await queryInterface.bulkInsert('Features', featuresList);
+
+    // Insert a user
+
+    const shaObj = new jsSHA('SHA-512', 'TEXT', { encoding: 'UTF8' });
+    shaObj.update('password');
+    const hashedPassword = shaObj.getHash('HEX');
+
+    const usersList = [
+      {
+        email: 'user@email.com',
+        password: hashedPassword,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ];
+    await queryInterface.bulkInsert('Users', usersList);
   },
 
   down: async (queryInterface, Sequelize) => {

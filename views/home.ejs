@@ -4,6 +4,21 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <div class="container loginContainer">
+      <!-- <div class='loginForm'>
+        <div>
+          <label>Email</label>
+          <input placeholder='Enter your email'>
+        </div>
+        <div>
+          <label>Password</label>
+          <input placeholder='Enter your password'>
+        </div>
+        <div>
+          <button class='login'>Login</button>
+        </div>
+      </div> -->
+    </div>
     <!-- Displays the bug form creator -->
     <div class="container mt-5 bg-secondary createBugForm">
       <div class="row">
@@ -13,11 +28,25 @@
         </div>
       </div>
     </div>
-    <!-- Displays a list of bugs -->
-    <div class="container mt-3 bg-light bugList">
+
+    <!-- Displays a Features Form Creator -->
+    <div class="container mt-5 bg-secondary createFeatureForm">
+      <div class="row">
+        <div class="col d-flex flex-row justify-content-center">
+          <div class="createFormContainer">
+          </div>
+        </div>
+      </div>
     </div>
+
+
+    <!-- Displays a list of bugs -->
+    <div class="container mt-3 bg-light bugList"></div>
+    
   </body>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src='helperFn.js'></script>
-    <script src='script.js'></script>
+    <script src='loginForm.js'></script>
+    <script src='createBugForm.js'></script>
+    <script src='getBugs.js'></script>
 </html>

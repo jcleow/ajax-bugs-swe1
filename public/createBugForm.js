@@ -97,13 +97,32 @@ createBugBtn.addEventListener('click', () => {
     });
 
   submitBtn.addEventListener('click', () => {
+    const arrayOfInputs = [problemInput, commitInput, errorTextInput, selectedFeature];
+    const arrayOfLabels = ['Problem', 'Commit', 'Error'];
+    console.log(arrayOfInputs, 'arrayOfInputs');
+    // Form Validation
+    let isFormValid;
+    arrayOfInputs.forEach((input, index) => {
+      if (input === selectedFeature && !selectedFeature) {
+        isFormValid = outputMissingFieldsMessage(createBugForm, 'Please select a feature');
+      }
+
+      if (input !== selectedFeature && input.value === '') {
+        isFormValid = outputMissingFieldsMessage(createBugForm, `Please fill in the input at ${arrayOfLabels[index]}`);
+      }
+    });
+    if (isFormValid === false) {
+      return;
+    }
+
     const data = {
-      problem: problemInput.value,
-      commit: commitInput.value,
-      errorText: errorTextInput.value,
+      problem: arrayOfInputs[0].value,
+      commit: arrayOfInputs[1].value,
+      errorText: arrayOfInputs[2].value,
       selectedFeature,
     };
-      // Make a request to create an bug
+
+    // Make a request to create an bug
     axios.post('/createBug', data)
       .then((response) => {
         // handle success
@@ -117,30 +136,3 @@ createBugBtn.addEventListener('click', () => {
       });
   });
 });
-
-// Retrieve all the bugs in the application
-axios.get('/bugs')
-  .then((response) => {
-    const arrayOfBugData = response.data.bugData;
-    console.log(response.data, 'res-data');
-    const bugContainer = document.querySelector('.bugList');
-    arrayOfBugData.forEach((bug) => {
-      const bugDiv = document.createElement('div');
-      const problemDiv = document.createElement('div');
-      const errorTextDiv = document.createElement('div');
-      const commitDiv = document.createElement('div');
-      const breakLine = document.createElement('br');
-      problemDiv.innerHTML = `Problem: ${bug.problem}`;
-      errorTextDiv.innerHTML = `Error: ${bug.errorText}`;
-      commitDiv.innerHTML = `Commit: ${bug.commit}`;
-      bugDiv.appendChild(problemDiv);
-      bugDiv.appendChild(errorTextDiv);
-      bugDiv.appendChild(commitDiv);
-      bugDiv.appendChild(breakLine);
-      bugContainer.appendChild(bugDiv);
-    });
-    document.body.appendChild(bugContainer);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
