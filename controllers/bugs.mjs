@@ -39,9 +39,12 @@ export default function bugs(db) {
   };
 
   const index = async (req, res) => {
-    const bugData = await db.Bug.findAll();
-    console.log(bugData, 'bugData');
-    res.send({ bugData });
+    try {
+      const bugData = await db.Bug.findAll();
+      res.send({ bugData });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return { show, create, index };

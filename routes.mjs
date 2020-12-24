@@ -8,16 +8,16 @@ import users from './controllers/users.mjs';
 export default function routes(app) {
   // initialize the controller functions here
   // pass in the db for all callbacks
-  const bugsController = bugs(db);
-  app.get('/', bugsController.show);
-  app.post('/createBug', bugsController.create);
-  app.get('/bugs', bugsController.index);
+  const BugsController = bugs(db);
+  app.get('/', BugsController.show);
+  app.post('/createBug', BugsController.create);
+  app.get('/bugs', BugsController.index);
 
-  const featuresController = features(db);
-  app.get('/features', featuresController.index);
+  const FeaturesController = features(db);
+  app.get('/features', FeaturesController.index);
 
-  const usersController = users(db);
-  app.get('/user', usersController.show);
-  app.get('/user/new', usersController.newForm);
-  app.post('/user/login', usersController.login);
+  const UsersController = users(db);
+  app.get('/user', UsersController.show);
+  app.get('/user/new', UsersController.newForm);
+  app.post('/user/login', UsersController.login);
 }

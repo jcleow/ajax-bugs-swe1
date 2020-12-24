@@ -1,9 +1,7 @@
 const loginContainer = document.querySelector('.loginContainer');
-// Create all the elements inside
-
+// Create all the elements inside loginContainer div for login form
 axios.get('/user')
   .then((res) => {
-    console.log(res);
     if (res.data.loggedInUserId) {
       createUserIdAndLogOutBtnDisplay(loginContainer, res);
     } else {
